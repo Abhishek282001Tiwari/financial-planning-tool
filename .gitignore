@@ -1,0 +1,30 @@
+## 3. .gitignore
+
+Byte-compiled / optimized / DLL files
+pycache/
+*.py[cod]
+*$py.class
+Virtual environments
+venv/
+env/
+ENV/
+.env
+IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+OS
+.DS_Store
+Thumbs.db
+Streamlit
+.streamlit/secrets.toml
+*.log
+Data files
+*.csv
+*.xlsx
+*.json
+data/
+Temporary files
+*.tmp
+*.temp
