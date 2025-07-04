@@ -17,99 +17,116 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Clean, minimalist CSS inspired by modern design's design
+# Ultra-clean, modern minimalist CSS
 st.markdown("""
 <style>
-    /* Import Inter font */
+    /* Import Inter font - modern design's choice */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
-    /* modern minimalist theme variables */
+    /* modern design-exact color palette */
     :root {
-        --primary-accent: #059669;
-        --text-primary: #111827;
+        --bg-primary: #FFFFFF;
+        --bg-accent: #ECEEF3;
+        --bg-sidebar: #F9FAFB;
+        --bg-footer: #F1F5F9;
+        --text-primary: #1A1A1A;
         --text-secondary: #6B7280;
-        --text-tertiary: #9CA3AF;
-        --border-light: #E5E7EB;
-        --border-medium: #D1D5DB;
-        --bg-white: #FFFFFF;
-        --bg-gray-50: #F9FAFB;
-        --bg-gray-100: #F3F4F6;
-        --bg-dark: #1F2937;
-        --text-dark-primary: #F9FAFB;
-        --text-dark-secondary: #E5E7EB;
+        --text-light: #9CA3AF;
+        --link-color: #3B82F6;
+        --button-soft-blue: #3B82F6;
+        --button-soft-red: #EF4444;
+        --border-subtle: #E5E7EB;
+        --border-light: #F3F4F6;
     }
     
-    /* Global styles */
+    /* Global reset and base styles */
     * {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        scroll-behavior: smooth;
     }
     
-    /* Override Streamlit defaults */
+    /* Override Streamlit defaults completely */
     .main {
-        background-color: var(--bg-white);
+        background-color: var(--bg-primary);
         color: var(--text-primary);
         padding: 0;
     }
     
-    /* Header */
-    .app-header {
+    .block-container {
+        padding: 0;
+        max-width: none;
+    }
+    
+    /* modern sticky header */
+    .claude-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-subtle);
+        padding: 1rem 2rem;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+    
+    .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 2rem;
-        border-bottom: 1px solid var(--border-light);
-        background-color: var(--bg-white);
-        position: sticky;
-        top: 0;
-        z-index: 100;
     }
     
-    .app-logo {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+    .logo {
         font-size: 1.5rem;
         font-weight: 600;
         color: var(--text-primary);
+        text-decoration: none;
     }
     
-    .theme-toggle {
-        padding: 0.5rem;
-        border: 1px solid var(--border-medium);
-        border-radius: 6px;
-        background: var(--bg-white);
-        color: var(--text-secondary);
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-    
-    .theme-toggle:hover {
-        background: var(--bg-gray-50);
-        border-color: var(--primary-accent);
-    }
-    
-    /* Main content */
+    /* Main content with proper spacing */
     .main-content {
+        margin-top: 80px;
         max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 3rem 2rem;
+        animation: fadeIn 0.6s ease-out;
     }
     
-    /* Typography */
-    .section-title {
-        font-size: 1.875rem;
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* modern typography hierarchy */
+    .hero-title {
+        font-size: 3rem;
         font-weight: 600;
         color: var(--text-primary);
-        margin-bottom: 0.5rem;
-        letter-spacing: -0.025em;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem;
     }
     
-    .section-subtitle {
-        font-size: 1.125rem;
+    .hero-subtitle {
+        font-size: 1.25rem;
         color: var(--text-secondary);
-        margin-bottom: 2rem;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+        max-width: 600px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 3rem 0 1.5rem 0;
+        letter-spacing: -0.015em;
     }
     
     .subsection-title {
@@ -119,97 +136,124 @@ st.markdown("""
         margin-bottom: 1rem;
     }
     
-    /* Cards */
-    .card {
-        background: var(--bg-white);
-        border: 1px solid var(--border-light);
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
+    /* Clean sidebar styling */
+    .sidebar .sidebar-content {
+        background: var(--bg-sidebar);
+        border-right: 1px solid var(--border-subtle);
+        padding: 2rem 1.5rem;
     }
     
-    .metric-card {
-        background: var(--bg-white);
-        border: 1px solid var(--border-light);
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
+    /* Soft, rounded input elements */
+    .stNumberInput > div > div > input,
+    .stSlider > div > div > div > div,
+    .stSelectbox > div > div {
+        border-radius: 12px;
+        border: 1px solid var(--border-subtle);
+        background: var(--bg-primary);
+        transition: all 0.2s ease;
     }
     
-    .metric-value {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 0.25rem;
+    .stNumberInput > div > div > input:focus,
+    .stSelectbox > div > div:focus {
+        border-color: var(--link-color);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        outline: none;
     }
     
-    .metric-label {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
+    /* Clean button styling */
+    .stButton > button {
+        background: var(--button-soft-blue);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 0.75rem 2rem;
         font-weight: 500;
+        transition: all 0.2s ease;
+        box-shadow: none;
     }
     
-    /* Status boxes */
-    .info-box {
-        background: var(--bg-gray-50);
+    .stButton > button:hover {
+        background: #2563EB;
+        transform: translateY(-1px);
+    }
+    
+    /* Soft card design */
+    .metric-card {
+        background: var(--bg-primary);
         border: 1px solid var(--border-light);
-        border-left: 4px solid var(--primary-accent);
-        border-radius: 6px;
-        padding: 1rem;
-        margin: 1rem 0;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .metric-card:hover {
+        border-color: var(--border-subtle);
+        transform: translateY(-2px);
+    }
+    
+    /* Status indicators - soft colors */
+    .info-box {
+        background: #F0F9FF;
+        border: 1px solid #BAE6FD;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
     }
     
     .warning-box {
-        background: #FEF3C7;
-        border: 1px solid #F59E0B;
-        border-left: 4px solid #F59E0B;
-        border-radius: 6px;
-        padding: 1rem;
-        margin: 1rem 0;
+        background: #FFFBEB;
+        border: 1px solid #FDE68A;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
     }
     
     .success-box {
-        background: #ECFDF5;
-        border: 1px solid var(--primary-accent);
-        border-left: 4px solid var(--primary-accent);
-        border-radius: 6px;
-        padding: 1rem;
-        margin: 1rem 0;
+        background: #F0FDF4;
+        border: 1px solid #BBF7D0;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
     }
     
-    /* Sidebar styling */
-    .sidebar .stExpander {
+    /* Expander styling */
+    .streamlit-expanderHeader {
+        background: var(--bg-primary);
         border: 1px solid var(--border-light);
-        border-radius: 6px;
-        margin-bottom: 1rem;
+        border-radius: 12px;
+        font-weight: 500;
     }
     
-    /* Footer */
-    .footer {
-        background: var(--bg-gray-100);
-        border-top: 1px solid var(--border-light);
-        padding: 3rem 2rem;
-        margin-top: 4rem;
+    /* Chart containers */
+    .chart-container {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-light);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* modern footer */
+    .claude-footer {
+        background: var(--bg-footer);
+        border-top: 1px solid var(--border-subtle);
+        margin-top: 5rem;
+        padding: 3rem 0;
     }
     
     .footer-content {
         max-width: 1200px;
         margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 2rem;
-    }
-    
-    .footer-brand {
-        font-weight: 600;
-        color: var(--text-primary);
+        text-align: center;
+        padding: 0 2rem;
     }
     
     .footer-links {
         display: flex;
-        gap: 2rem;
+        justify-content: center;
+        gap: 3rem;
+        margin-bottom: 2rem;
         flex-wrap: wrap;
     }
     
@@ -217,65 +261,65 @@ st.markdown("""
         color: var(--text-secondary);
         text-decoration: none;
         font-weight: 500;
-        transition: color 0.2s ease;
+        transition: all 0.2s ease;
+        position: relative;
     }
     
     .footer-links a:hover {
-        color: var(--primary-accent);
+        color: var(--text-primary);
     }
     
-    .copyright {
-        width: 100%;
-        text-align: center;
+    .footer-links a:hover::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--text-primary);
+    }
+    
+    .footer-copyright {
+        color: var(--text-light);
         font-size: 0.875rem;
-        color: var(--text-tertiary);
-        margin-top: 2rem;
         padding-top: 2rem;
-        border-top: 1px solid var(--border-light);
+        border-top: 1px solid var(--border-subtle);
     }
     
-    /* Dark mode styles */
-    [data-theme="dark"] {
-        --text-primary: var(--text-dark-primary);
-        --text-secondary: var(--text-dark-secondary);
-        --text-tertiary: #9CA3AF;
-        --bg-white: var(--bg-dark);
-        --bg-gray-50: #374151;
-        --bg-gray-100: #374151;
-        --border-light: #4B5563;
-        --border-medium: #6B7280;
-    }
-    
-    /* Mobile responsive */
+    /* Mobile responsiveness */
     @media (max-width: 768px) {
-        .app-header {
+        .claude-header {
             padding: 1rem;
         }
         
         .main-content {
-            padding: 1rem;
+            padding: 2rem 1rem;
         }
         
-        .footer-content {
-            flex-direction: column;
-            text-align: center;
+        .hero-title {
+            font-size: 2rem;
         }
         
         .footer-links {
-            justify-content: center;
+            gap: 2rem;
         }
     }
     
-    /* Hide Streamlit elements */
+    /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
     .stDeployButton {display: none;}
     footer {visibility: hidden;}
     .stApp > header {visibility: hidden;}
     
-    /* Charts */
+    /* Smooth scrolling for the entire page */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Chart styling to match modern design aesthetic */
     .plotly-graph-div {
-        border: 1px solid var(--border-light);
-        border-radius: 6px;
+        border-radius: 15px;
+        overflow: hidden;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -283,18 +327,16 @@ st.markdown("""
 # Initialize session state
 if 'calculated' not in st.session_state:
     st.session_state.calculated = False
-if 'dark_mode' not in st.session_state:
-    st.session_state.dark_mode = False
 
-# Constants with clean grayscale + accent color scheme
+# Constants with soft, modern color palette
 ASSET_CLASSES = {
-    'Equity': {'color': '#059669', 'expected_return': 0.12, 'risk': 0.20},
-    'Bonds': {'color': '#6B7280', 'expected_return': 0.06, 'risk': 0.05},
-    'Real Estate': {'color': '#9CA3AF', 'expected_return': 0.08, 'risk': 0.15},
-    'Commodities': {'color': '#D1D5DB', 'expected_return': 0.07, 'risk': 0.25},
-    'Crypto': {'color': '#4B5563', 'expected_return': 0.20, 'risk': 0.80},
-    'Insurance': {'color': '#374151', 'expected_return': 0.04, 'risk': 0.02},
-    'Emergency Fund': {'color': '#111827', 'expected_return': 0.03, 'risk': 0.01}
+    'Equity': {'color': '#3B82F6', 'expected_return': 0.12, 'risk': 0.20},
+    'Bonds': {'color': '#8B5CF6', 'expected_return': 0.06, 'risk': 0.05},
+    'Real Estate': {'color': '#06B6D4', 'expected_return': 0.08, 'risk': 0.15},
+    'Commodities': {'color': '#84CC16', 'expected_return': 0.07, 'risk': 0.25},
+    'Crypto': {'color': '#F59E0B', 'expected_return': 0.20, 'risk': 0.80},
+    'Insurance': {'color': '#EF4444', 'expected_return': 0.04, 'risk': 0.02},
+    'Emergency Fund': {'color': '#6B7280', 'expected_return': 0.03, 'risk': 0.01}
 }
 
 # Helper functions
@@ -340,51 +382,33 @@ def calculate_portfolio_metrics(allocations):
     total_risk = np.sqrt(total_risk)
     return total_return, total_risk
 
-# Clean header with logo and theme toggle
-header_col1, header_col2 = st.columns([3, 1])
-with header_col1:
-    st.markdown("""
-    <div class="app-header">
-        <div class="app-logo">
-            <span>📊</span>
-            <span>WealthWise</span>
-        </div>
+# modern sticky header
+st.markdown("""
+<div class="claude-header">
+    <div class="header-content">
+        <div class="logo">WealthWise</div>
     </div>
-    """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
 
-with header_col2:
-    if st.button("🌙" if not st.session_state.dark_mode else "☀️", 
-                 key="theme_toggle",
-                 help="Toggle dark/light mode"):
-        st.session_state.dark_mode = not st.session_state.dark_mode
-        st.rerun()
-
-# Apply dark mode if enabled
-if st.session_state.dark_mode:
-    st.markdown("""
-    <script>
-        document.documentElement.setAttribute('data-theme', 'dark');
-    </script>
-    """, unsafe_allow_html=True)
-
-# Main content wrapper
+# Main content wrapper with hero section
 st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
-# Page title and description
-st.markdown('<h1 class="section-title">Financial Planning Tool</h1>', unsafe_allow_html=True)
-st.markdown('<p class="section-subtitle">Plan your investments and track your financial goals with data-driven insights.</p>', unsafe_allow_html=True)
+# Hero section - modern design style
+st.markdown('<h1 class="hero-title">Smart Financial Planning</h1>', unsafe_allow_html=True)
+st.markdown('<p class="hero-subtitle">Plan your investments and track your financial goals with data-driven insights. Get personalized recommendations based on your age and risk profile.</p>', unsafe_allow_html=True)
 
-# Clean sidebar
+# Clean sidebar with soft styling
 with st.sidebar:
-    st.markdown("### Controls")
+    st.markdown("### Input Parameters")
     
     # Personal Information
-    with st.expander("Personal Information", expanded=True):
+    with st.expander("👤 Personal Information", expanded=True):
         age = st.number_input("Age", min_value=18, max_value=100, value=30, help="Your current age")
         monthly_income = st.number_input("Monthly Income ($)", min_value=0, value=5000, step=100, help="Your monthly income after taxes")
     
     # Current Portfolio
-    with st.expander("Current Portfolio", expanded=True):
+    with st.expander("💼 Current Portfolio", expanded=True):
         st.info("Enter your current investments in each asset class")
         
         current_portfolio = {}
@@ -404,7 +428,7 @@ with st.sidebar:
         st.metric("Total Invested", f"${total_invested:,.2f}")
     
     # Investment Goals
-    with st.expander("Investment Goals", expanded=True):
+    with st.expander("🎯 Investment Goals", expanded=True):
         monthly_investment = st.slider(
             "Monthly Investment ($)", 
             min_value=0, 
@@ -433,25 +457,25 @@ if calculate_button or st.session_state.calculated:
     col1, col2, col3 = st.columns([1.5, 1.5, 1])
     
     with col1:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
         st.markdown('<h3 class="subsection-title">Current Portfolio Distribution</h3>', unsafe_allow_html=True)
         
-        # Create clean pie chart for current portfolio
+        # Create soft, modern pie chart
         if total_invested > 0:
             fig_current = go.Figure(data=[go.Pie(
                 labels=list(current_portfolio.keys()),
                 values=list(current_portfolio.values()),
-                hole=.3,
+                hole=.4,
                 marker_colors=[ASSET_CLASSES[asset]['color'] for asset in current_portfolio.keys()],
                 textinfo='label+percent',
                 textfont_size=11,
-                marker=dict(line=dict(color='#FFFFFF', width=1))
+                marker=dict(line=dict(color='#FFFFFF', width=2))
             )])
             fig_current.update_layout(
                 height=400,
                 showlegend=True,
                 margin=dict(l=0, r=0, t=0, b=0),
-                font=dict(family="Inter, sans-serif", size=12),
+                font=dict(family="Inter, sans-serif", size=12, color='#1A1A1A'),
                 paper_bgcolor='rgba(0,0,0,0)',
                 plot_bgcolor='rgba(0,0,0,0)',
                 legend=dict(
@@ -474,27 +498,27 @@ if calculate_button or st.session_state.calculated:
             current_percentages = {asset: 0 for asset in ASSET_CLASSES.keys()}
     
     with col2:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
         st.markdown('<h3 class="subsection-title">Recommended Allocation</h3>', unsafe_allow_html=True)
         
         # Get age-based recommendations
         recommended_allocation = get_age_based_allocation(age)
         
-        # Create clean pie chart for recommended portfolio
+        # Create soft, modern pie chart
         fig_recommended = go.Figure(data=[go.Pie(
             labels=list(recommended_allocation.keys()),
             values=list(recommended_allocation.values()),
-            hole=.3,
+            hole=.4,
             marker_colors=[ASSET_CLASSES[asset]['color'] for asset in recommended_allocation.keys()],
             textinfo='label+percent',
             textfont_size=11,
-            marker=dict(line=dict(color='#FFFFFF', width=1))
+            marker=dict(line=dict(color='#FFFFFF', width=2))
         )])
         fig_recommended.update_layout(
             height=400,
             showlegend=True,
             margin=dict(l=0, r=0, t=0, b=0),
-            font=dict(family="Inter, sans-serif", size=12),
+            font=dict(family="Inter, sans-serif", size=12, color='#1A1A1A'),
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
             legend=dict(
@@ -529,8 +553,8 @@ if calculate_button or st.session_state.calculated:
         st.metric("Sharpe Ratio", f"{(recommended_return - 0.03)/recommended_risk:.2f}" if recommended_risk > 0 else "N/A")
         st.markdown('</div>', unsafe_allow_html=True)
     
-    # Clean comparison chart
-    st.markdown('<h2 class="section-title">Allocation Comparison</h2>', unsafe_allow_html=True)
+    # Soft comparison chart
+    st.markdown('<h2 class="section-title">Portfolio Comparison</h2>', unsafe_allow_html=True)
     
     # Create comparison dataframe
     comparison_data = []
@@ -544,47 +568,49 @@ if calculate_button or st.session_state.calculated:
     
     df_comparison = pd.DataFrame(comparison_data)
     
-    # Create clean grouped bar chart
+    # Create soft, modern grouped bar chart
     fig_comparison = go.Figure()
     fig_comparison.add_trace(go.Bar(
         name='Current Portfolio',
         x=df_comparison['Asset Class'],
         y=df_comparison['Current %'],
-        marker_color='#059669',
-        marker_line_width=0
+        marker_color='#3B82F6',
+        marker_line_width=0,
+        opacity=0.8
     ))
     fig_comparison.add_trace(go.Bar(
         name='Recommended Portfolio',
         x=df_comparison['Asset Class'],
         y=df_comparison['Recommended %'],
         marker_color='#6B7280',
-        marker_line_width=0
+        marker_line_width=0,
+        opacity=0.8
     ))
     fig_comparison.update_layout(
         barmode='group',
         height=400,
         xaxis_title="Asset Class",
         yaxis_title="Allocation %",
-        font=dict(family="Inter, sans-serif", size=12),
-        legend=dict(x=0.7, y=1),
+        font=dict(family="Inter, sans-serif", size=12, color='#1A1A1A'),
+        legend=dict(x=0.7, y=1, bgcolor='rgba(255,255,255,0.9)'),
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(showgrid=False),
-        yaxis=dict(showgrid=True, gridcolor='#E5E7EB')
+        xaxis=dict(showgrid=False, linecolor='#E5E7EB'),
+        yaxis=dict(showgrid=True, gridcolor='#F3F4F6', linecolor='#E5E7EB')
     )
     st.plotly_chart(fig_comparison, use_container_width=True)
     
-    # Clean future projections
-    st.markdown('<h2 class="section-title">Future Value Projections</h2>', unsafe_allow_html=True)
+    # Soft future projections
+    st.markdown('<h2 class="section-title">Growth Projections</h2>', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
         st.markdown('<h3 class="subsection-title">Growth Scenarios</h3>', unsafe_allow_html=True)
         
         # Calculate future values for different scenarios
         scenarios = [0.05, 0.10, 0.15]
-        scenario_colors = ['#059669', '#6B7280', '#9CA3AF']
+        scenario_colors = ['#3B82F6', '#8B5CF6', '#06B6D4']
         years_range = list(range(1, investment_horizon + 1))
         
         fig_projection = go.Figure()
@@ -601,7 +627,8 @@ if calculate_button or st.session_state.calculated:
                 y=future_values,
                 mode='lines',
                 name=f'{int(rate*100)}% CAGR',
-                line=dict(width=3, color=scenario_colors[i])
+                line=dict(width=3, color=scenario_colors[i]),
+                opacity=0.8
             ))
         
         fig_projection.update_layout(
@@ -610,18 +637,18 @@ if calculate_button or st.session_state.calculated:
             yaxis_title="Portfolio Value ($)",
             hovermode='x unified',
             yaxis_tickformat='$,.0f',
-            font=dict(family="Inter, sans-serif", size=12),
-            legend=dict(x=0.02, y=0.98),
+            font=dict(family="Inter, sans-serif", size=12, color='#1A1A1A'),
+            legend=dict(x=0.02, y=0.98, bgcolor='rgba(255,255,255,0.9)'),
             plot_bgcolor='rgba(0,0,0,0)',
             paper_bgcolor='rgba(0,0,0,0)',
-            xaxis=dict(showgrid=False),
-            yaxis=dict(showgrid=True, gridcolor='#E5E7EB')
+            xaxis=dict(showgrid=False, linecolor='#E5E7EB'),
+            yaxis=dict(showgrid=True, gridcolor='#F3F4F6', linecolor='#E5E7EB')
         )
         st.plotly_chart(fig_projection, use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
     
     with col2:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
         st.markdown('<h3 class="subsection-title">Goal Achievement</h3>', unsafe_allow_html=True)
         
         # Calculate final values
@@ -736,23 +763,19 @@ else:
 # Close main content wrapper
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Clean footer with real URLs
+# modern footer
 st.markdown("""
-<div class="footer">
+<div class="claude-footer">
     <div class="footer-content">
-        <div class="footer-brand">
-            WealthWise
-        </div>
         <div class="footer-links">
-            <a href="https://www.linkedin.com/in/abhishek-tiwari-282001/" target="_blank">LinkedIn</a>
-            <a href="https://twitter.com/abhishek282001" target="_blank">Twitter</a>
-            <a href="mailto:abhishek282001@gmail.com" target="_blank">Contact</a>
+            <a href="https://www.linkedin.com/in/abhishek282001tiwari/" target="_blank">LinkedIn</a>
+            <a href="https://twitter.com/yourhandle" target="_blank">Twitter</a>
             <a href="https://github.com/Abhishek282001Tiwari" target="_blank">GitHub</a>
+            <a href="mailto:youremail@example.com" target="_blank">Contact</a>
         </div>
-    </div>
-    <div class="copyright">
-        © 2024 WealthWise Financial Planning Tool. All rights reserved.<br>
-        This tool provides educational guidance only. Consult a financial advisor for personalized advice.
+        <div class="footer-copyright">
+            © 2024 WealthWise. This tool provides educational guidance only.
+        </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
