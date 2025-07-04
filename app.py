@@ -17,54 +17,207 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
+# Modern CSS styling with premium financial dashboard theme
 st.markdown("""
 <style>
-    .main-header {
-        text-align: center;
-        color: #2c3e50;
-        padding: 1rem;
-        background-color: #ecf0f1;
-        border-radius: 10px;
-        margin-bottom: 2rem;
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    /* Global theme variables */
+    :root {
+        --primary-mint: #00D4AA;
+        --primary-teal: #008B8B;
+        --accent-gold: #FFD700;
+        --dark-navy: #1B2951;
+        --light-gray: #F8FAFC;
+        --white: #FFFFFF;
+        --text-dark: #2D3748;
+        --text-light: #718096;
+        --border-light: #E2E8F0;
+        --success-green: #10B981;
+        --warning-orange: #F59E0B;
+        --error-red: #EF4444;
     }
-    .metric-card {
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-radius: 10px;
-        border: 1px solid #e9ecef;
+    
+    /* Override Streamlit defaults */
+    .main {
+        padding: 0;
+        background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+    }
+    
+    /* Sticky header */
+    .sticky-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: linear-gradient(135deg, var(--primary-mint) 0%, var(--primary-teal) 100%);
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+    }
+    
+    .sticky-header h1 {
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin: 0;
+        text-align: center;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sticky-header .subtitle {
+        color: rgba(255, 255, 255, 0.9);
+        font-family: 'Inter', sans-serif;
+        font-size: 1.1rem;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+    
+    /* Main content padding to account for sticky header */
+    .main-content {
+        margin-top: 140px;
+        padding: 2rem;
+    }
+    
+    /* Enhanced typography */
+    .section-header {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 1.8rem;
+        color: var(--dark-navy);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid var(--primary-mint);
+    }
+    
+    .subsection-header {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        font-size: 1.3rem;
+        color: var(--text-dark);
         margin-bottom: 1rem;
     }
+    
+    /* Premium metric cards */
+    .metric-card {
+        background: linear-gradient(135deg, var(--white) 0%, #F9FAFB 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        border: 1px solid var(--border-light);
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Recommendation boxes */
     .recommendation-box {
-        background-color: #e3f2fd;
-        padding: 1rem;
-        border-radius: 10px;
-        border-left: 4px solid #1976d2;
-        margin-top: 1rem;
+        background: linear-gradient(135deg, #E6FFFA 0%, #B2F5EA 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        border-left: 6px solid var(--primary-teal);
+        margin-top: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0, 139, 139, 0.1);
     }
+    
     .warning-box {
-        background-color: #fff3cd;
-        padding: 1rem;
-        border-radius: 10px;
-        border-left: 4px solid #ffc107;
-        margin-top: 1rem;
+        background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        border-left: 6px solid var(--warning-orange);
+        margin-top: 1.5rem;
+        box-shadow: 0 4px 20px rgba(245, 158, 11, 0.1);
     }
+    
+    .success-box {
+        background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        border-left: 6px solid var(--success-green);
+        margin-top: 1.5rem;
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+    }
+    
+    /* Footer styling */
+    .footer {
+        background: linear-gradient(135deg, var(--dark-navy) 0%, #2D3748 100%);
+        color: white;
+        padding: 3rem 2rem 2rem;
+        margin-top: 4rem;
+        border-top: 4px solid var(--primary-mint);
+    }
+    
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    
+    .footer-links {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+        color: var(--primary-mint);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+        color: var(--accent-gold);
+    }
+    
+    .copyright {
+        font-size: 0.9rem;
+        color: #A0AEC0;
+        margin-top: 1rem;
+        text-align: center;
+    }
+    
+    /* Chart container improvements */
+    .chart-container {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-light);
+    }
+    
+    /* Hide streamlit branding */
+    #MainMenu {visibility: hidden;}
+    .stDeployButton {display:none;}
+    footer {visibility: hidden;}
+    .stApp > header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
 # Initialize session state
 if 'calculated' not in st.session_state:
     st.session_state.calculated = False
+if 'dark_mode' not in st.session_state:
+    st.session_state.dark_mode = False
 
-# Constants
+# Constants with modern color scheme
 ASSET_CLASSES = {
-    'Equity': {'color': '#3498db', 'expected_return': 0.12, 'risk': 0.20},
-    'Bonds': {'color': '#2ecc71', 'expected_return': 0.06, 'risk': 0.05},
-    'Real Estate': {'color': '#8b4513', 'expected_return': 0.08, 'risk': 0.15},
-    'Commodities': {'color': '#f1c40f', 'expected_return': 0.07, 'risk': 0.25},
-    'Crypto': {'color': '#f39c12', 'expected_return': 0.20, 'risk': 0.80},
-    'Insurance': {'color': '#9b59b6', 'expected_return': 0.04, 'risk': 0.02},
-    'Emergency Fund': {'color': '#95a5a6', 'expected_return': 0.03, 'risk': 0.01}
+    'Equity': {'color': '#00D4AA', 'expected_return': 0.12, 'risk': 0.20, 'icon': '📈'},
+    'Bonds': {'color': '#008B8B', 'expected_return': 0.06, 'risk': 0.05, 'icon': '🏦'},
+    'Real Estate': {'color': '#8B4513', 'expected_return': 0.08, 'risk': 0.15, 'icon': '🏠'},
+    'Commodities': {'color': '#FFD700', 'expected_return': 0.07, 'risk': 0.25, 'icon': '🥇'},
+    'Crypto': {'color': '#F59E0B', 'expected_return': 0.20, 'risk': 0.80, 'icon': '₿'},
+    'Insurance': {'color': '#1B2951', 'expected_return': 0.04, 'risk': 0.02, 'icon': '🛡️'},
+    'Emergency Fund': {'color': '#10B981', 'expected_return': 0.03, 'risk': 0.01, 'icon': '💰'}
 }
 
 # Helper functions
@@ -110,54 +263,100 @@ def calculate_portfolio_metrics(allocations):
     total_risk = np.sqrt(total_risk)
     return total_return, total_risk
 
-# Main app
-st.markdown('<div class="main-header"><h1>💰 Financial Planning & Portfolio Allocation Tool</h1></div>', unsafe_allow_html=True)
+# Sticky header
+st.markdown("""
+<div class="sticky-header">
+    <h1>💎 WealthWise</h1>
+    <div class="subtitle">Your Premium Financial Planning Dashboard</div>
+</div>
+""", unsafe_allow_html=True)
 
-# Sidebar for inputs
+# Dark mode toggle
+col1, col2, col3 = st.columns([1, 1, 1])
+with col3:
+    if st.button("🌙 Dark Mode" if not st.session_state.dark_mode else "☀️ Light Mode"):
+        st.session_state.dark_mode = not st.session_state.dark_mode
+        st.rerun()
+
+# Apply dark mode styles if enabled
+if st.session_state.dark_mode:
+    st.markdown("""
+    <style>
+        .main {
+            background: linear-gradient(135deg, #1A202C 0%, #2D3748 100%);
+            color: white;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #2D3748 0%, #4A5568 100%);
+            color: white;
+        }
+        .chart-container {
+            background: #2D3748;
+            color: white;
+        }
+        .section-header {
+            color: var(--primary-mint);
+        }
+        .subsection-header {
+            color: #E2E8F0;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+# Main content wrapper
+st.markdown('<div class="main-content">', unsafe_allow_html=True)
+
+# Enhanced sidebar with expanders and icons
 with st.sidebar:
-    st.header("📝 Your Information")
+    st.markdown('<div class="section-header">📊 Dashboard Controls</div>', unsafe_allow_html=True)
     
-    # Basic inputs
-    age = st.number_input("Age", min_value=18, max_value=100, value=30, help="Your current age")
-    monthly_income = st.number_input("Monthly Income ($)", min_value=0, value=5000, step=100, help="Your monthly income after taxes")
+    # Personal Information Expander
+    with st.expander("👤 Personal Information", expanded=True):
+        age = st.number_input("Age", min_value=18, max_value=100, value=30, help="Your current age")
+        monthly_income = st.number_input("💰 Monthly Income ($)", min_value=0, value=5000, step=100, help="Your monthly income after taxes")
     
-    st.header("💼 Current Portfolio")
-    st.info("Enter your current investments in each asset class")
+    # Current Portfolio Expander
+    with st.expander("💼 Current Portfolio", expanded=True):
+        st.info("💡 Enter your current investments in each asset class")
+        
+        current_portfolio = {}
+        total_invested = 0
+        
+        for asset in ASSET_CLASSES.keys():
+            icon = ASSET_CLASSES[asset]['icon']
+            amount = st.number_input(
+                f"{icon} {asset} ($)", 
+                min_value=0.0, 
+                value=0.0, 
+                step=100.0,
+                key=f"current_{asset}"
+            )
+            current_portfolio[asset] = amount
+            total_invested += amount
+        
+        st.metric("🎯 Total Invested", f"${total_invested:,.2f}")
     
-    current_portfolio = {}
-    total_invested = 0
-    
-    for asset in ASSET_CLASSES.keys():
-        amount = st.number_input(
-            f"{asset} ($)", 
-            min_value=0.0, 
-            value=0.0, 
-            step=100.0,
-            key=f"current_{asset}"
+    # Investment Goals Expander
+    with st.expander("🎯 Investment Goals", expanded=True):
+        monthly_investment = st.slider(
+            "💳 Monthly Investment ($)", 
+            min_value=0, 
+            max_value=int(monthly_income * 0.5), 
+            value=int(monthly_income * 0.2),
+            help="How much you plan to invest monthly"
         )
-        current_portfolio[asset] = amount
-        total_invested += amount
+        
+        investment_horizon = st.slider(
+            "⏰ Investment Horizon (years)", 
+            min_value=1, 
+            max_value=40, 
+            value=10,
+            help="How long you plan to invest"
+        )
     
-    st.metric("Total Invested", f"${total_invested:,.2f}")
-    
-    st.header("🎯 Investment Goals")
-    monthly_investment = st.slider(
-        "Monthly Investment ($)", 
-        min_value=0, 
-        max_value=int(monthly_income * 0.5), 
-        value=int(monthly_income * 0.2),
-        help="How much you plan to invest monthly"
-    )
-    
-    investment_horizon = st.slider(
-        "Investment Horizon (years)", 
-        min_value=1, 
-        max_value=40, 
-        value=10,
-        help="How long you plan to invest"
-    )
-    
-    calculate_button = st.button("📊 Calculate Results", type="primary", use_container_width=True)
+    # Calculate button with enhanced styling
+    st.markdown("<br>", unsafe_allow_html=True)
+    calculate_button = st.button("🚀 Generate Analysis", type="primary", use_container_width=True)
 
 # Main content area
 if calculate_button or st.session_state.calculated:
@@ -167,24 +366,37 @@ if calculate_button or st.session_state.calculated:
     col1, col2, col3 = st.columns([1.5, 1.5, 1])
     
     with col1:
-        st.subheader("📊 Current Portfolio Distribution")
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+        st.markdown('<div class="subsection-header">📊 Current Portfolio Distribution</div>', unsafe_allow_html=True)
         
-        # Create pie chart for current portfolio
+        # Create enhanced pie chart for current portfolio
         if total_invested > 0:
             fig_current = go.Figure(data=[go.Pie(
                 labels=list(current_portfolio.keys()),
                 values=list(current_portfolio.values()),
-                hole=.3,
-                marker_colors=[ASSET_CLASSES[asset]['color'] for asset in current_portfolio.keys()]
+                hole=.4,
+                marker_colors=[ASSET_CLASSES[asset]['color'] for asset in current_portfolio.keys()],
+                textinfo='label+percent',
+                textfont_size=12,
+                marker=dict(line=dict(color='#FFFFFF', width=2))
             )])
             fig_current.update_layout(
-                height=400,
+                height=450,
                 showlegend=True,
-                margin=dict(l=0, r=0, t=30, b=0)
+                margin=dict(l=0, r=0, t=30, b=0),
+                font=dict(family="Inter, sans-serif", size=14),
+                legend=dict(
+                    orientation="v",
+                    yanchor="middle",
+                    y=0.5,
+                    xanchor="left",
+                    x=1.05
+                )
             )
             st.plotly_chart(fig_current, use_container_width=True)
         else:
-            st.info("No current investments to display")
+            st.info("💡 No current investments to display")
+        st.markdown('</div>', unsafe_allow_html=True)
         
         # Calculate current portfolio percentages
         if total_invested > 0:
@@ -193,46 +405,61 @@ if calculate_button or st.session_state.calculated:
             current_percentages = {asset: 0 for asset in ASSET_CLASSES.keys()}
     
     with col2:
-        st.subheader("🎯 Recommended Allocation")
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+        st.markdown('<div class="subsection-header">🎯 Recommended Allocation</div>', unsafe_allow_html=True)
         
         # Get age-based recommendations
         recommended_allocation = get_age_based_allocation(age)
         
-        # Create pie chart for recommended portfolio
+        # Create enhanced pie chart for recommended portfolio
         fig_recommended = go.Figure(data=[go.Pie(
             labels=list(recommended_allocation.keys()),
             values=list(recommended_allocation.values()),
-            hole=.3,
-            marker_colors=[ASSET_CLASSES[asset]['color'] for asset in recommended_allocation.keys()]
+            hole=.4,
+            marker_colors=[ASSET_CLASSES[asset]['color'] for asset in recommended_allocation.keys()],
+            textinfo='label+percent',
+            textfont_size=12,
+            marker=dict(line=dict(color='#FFFFFF', width=2))
         )])
         fig_recommended.update_layout(
-            height=400,
+            height=450,
             showlegend=True,
-            margin=dict(l=0, r=0, t=30, b=0)
+            margin=dict(l=0, r=0, t=30, b=0),
+            font=dict(family="Inter, sans-serif", size=14),
+            legend=dict(
+                orientation="v",
+                yanchor="middle",
+                y=0.5,
+                xanchor="left",
+                x=1.05
+            )
         )
         st.plotly_chart(fig_recommended, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
     
     with col3:
-        st.subheader("📈 Key Metrics")
+        st.markdown('<div class="subsection-header">📈 Key Metrics</div>', unsafe_allow_html=True)
         
         # Calculate portfolio metrics
         current_return, current_risk = calculate_portfolio_metrics(current_percentages)
         recommended_return, recommended_risk = calculate_portfolio_metrics(recommended_allocation)
         
         st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-        st.metric("Expected Annual Return", f"{current_return*100:.1f}%")
-        st.metric("Portfolio Risk (σ)", f"{current_risk*100:.1f}%")
-        st.metric("Sharpe Ratio", f"{(current_return - 0.03)/current_risk:.2f}" if current_risk > 0 else "N/A")
+        st.markdown("**📊 Current Portfolio**")
+        st.metric("📈 Expected Annual Return", f"{current_return*100:.1f}%")
+        st.metric("⚠️ Portfolio Risk (σ)", f"{current_risk*100:.1f}%")
+        st.metric("🎯 Sharpe Ratio", f"{(current_return - 0.03)/current_risk:.2f}" if current_risk > 0 else "N/A")
         st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown('<div class="metric-card">', unsafe_allow_html=True)
-        st.markdown("**Recommended Portfolio:**")
-        st.metric("Expected Return", f"{recommended_return*100:.1f}%")
-        st.metric("Risk Level", f"{recommended_risk*100:.1f}%")
+        st.markdown("**🎯 Recommended Portfolio**")
+        st.metric("📈 Expected Return", f"{recommended_return*100:.1f}%")
+        st.metric("⚠️ Risk Level", f"{recommended_risk*100:.1f}%")
+        st.metric("🏆 Sharpe Ratio", f"{(recommended_return - 0.03)/recommended_risk:.2f}" if recommended_risk > 0 else "N/A")
         st.markdown('</div>', unsafe_allow_html=True)
     
-    # Comparison chart
-    st.subheader("📊 Current vs Recommended Allocation")
+    # Enhanced comparison chart
+    st.markdown('<div class="section-header">📊 Current vs Recommended Allocation</div>', unsafe_allow_html=True)
     
     # Create comparison dataframe
     comparison_data = []
@@ -246,42 +473,52 @@ if calculate_button or st.session_state.calculated:
     
     df_comparison = pd.DataFrame(comparison_data)
     
-    # Create grouped bar chart
+    # Create enhanced grouped bar chart
     fig_comparison = go.Figure()
     fig_comparison.add_trace(go.Bar(
-        name='Current',
+        name='Current Portfolio',
         x=df_comparison['Asset Class'],
         y=df_comparison['Current %'],
-        marker_color='lightblue'
+        marker_color='#00D4AA',
+        marker_line_color='#008B8B',
+        marker_line_width=2
     ))
     fig_comparison.add_trace(go.Bar(
-        name='Recommended',
+        name='Recommended Portfolio',
         x=df_comparison['Asset Class'],
         y=df_comparison['Recommended %'],
-        marker_color='darkblue'
+        marker_color='#008B8B',
+        marker_line_color='#00D4AA',
+        marker_line_width=2
     ))
     fig_comparison.update_layout(
         barmode='group',
-        height=400,
+        height=450,
         xaxis_title="Asset Class",
         yaxis_title="Allocation %",
-        legend=dict(x=0.7, y=1)
+        font=dict(family="Inter, sans-serif", size=14),
+        legend=dict(x=0.7, y=1, bgcolor='rgba(255,255,255,0.8)'),
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)'
     )
     st.plotly_chart(fig_comparison, use_container_width=True)
     
-    # Future projections
+    # Enhanced future projections
+    st.markdown('<div class="section-header">💰 Future Value Projections</div>', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("💰 Future Value Projections")
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+        st.markdown('<div class="subsection-header">📈 Growth Scenarios</div>', unsafe_allow_html=True)
         
         # Calculate future values for different scenarios
         scenarios = [0.05, 0.10, 0.15]
+        scenario_colors = ['#10B981', '#00D4AA', '#FFD700']
         years_range = list(range(1, investment_horizon + 1))
         
         fig_projection = go.Figure()
         
-        for rate in scenarios:
+        for i, rate in enumerate(scenarios):
             future_values = []
             for year in years_range:
                 fv_current = calculate_future_value(total_invested, rate, year)
@@ -291,22 +528,29 @@ if calculate_button or st.session_state.calculated:
             fig_projection.add_trace(go.Scatter(
                 x=years_range,
                 y=future_values,
-                mode='lines',
+                mode='lines+markers',
                 name=f'{int(rate*100)}% CAGR',
-                line=dict(width=3)
+                line=dict(width=4, color=scenario_colors[i]),
+                marker=dict(size=6, color=scenario_colors[i])
             ))
         
         fig_projection.update_layout(
-            height=400,
+            height=450,
             xaxis_title="Years",
             yaxis_title="Portfolio Value ($)",
             hovermode='x unified',
-            yaxis_tickformat='$,.0f'
+            yaxis_tickformat='$,.0f',
+            font=dict(family="Inter, sans-serif", size=14),
+            legend=dict(x=0.02, y=0.98, bgcolor='rgba(255,255,255,0.8)'),
+            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor='rgba(0,0,0,0)'
         )
         st.plotly_chart(fig_projection, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
     
     with col2:
-        st.subheader("🎯 Goal Achievement")
+        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+        st.markdown('<div class="subsection-header">🎯 Goal Achievement</div>', unsafe_allow_html=True)
         
         # Calculate final values
         conservative_fv = calculate_future_value(total_invested, 0.05, investment_horizon) + \
@@ -320,19 +564,20 @@ if calculate_button or st.session_state.calculated:
         
         col_a, col_b, col_c = st.columns(3)
         with col_a:
-            st.metric("Conservative", f"${conservative_fv:,.0f}", f"+${conservative_fv-total_invested:,.0f}")
+            st.metric("🐌 Conservative", f"${conservative_fv:,.0f}", f"+${conservative_fv-total_invested:,.0f}")
         with col_b:
-            st.metric("Moderate", f"${moderate_fv:,.0f}", f"+${moderate_fv-total_invested:,.0f}")
+            st.metric("🚀 Moderate", f"${moderate_fv:,.0f}", f"+${moderate_fv-total_invested:,.0f}")
         with col_c:
-            st.metric("Aggressive", f"${aggressive_fv:,.0f}", f"+${aggressive_fv-total_invested:,.0f}")
+            st.metric("🔥 Aggressive", f"${aggressive_fv:,.0f}", f"+${aggressive_fv-total_invested:,.0f}")
         
         # Monthly SIP impact
-        st.markdown(f"**Impact of ${monthly_investment} monthly investment:**")
+        st.markdown(f"**💡 Impact of ${monthly_investment} monthly investment:**")
         sip_value_10yr = calculate_sip_future_value(monthly_investment, 0.10, 10)
-        st.info(f"💡 Investing ${monthly_investment}/month for 10 years at 10% return = ${sip_value_10yr:,.0f}")
+        st.info(f"💰 Investing ${monthly_investment}/month for 10 years at 10% return = ${sip_value_10yr:,.0f}")
+        st.markdown('</div>', unsafe_allow_html=True)
     
-    # Rebalancing recommendations
-    st.subheader("🔄 Rebalancing Recommendations")
+    # Enhanced rebalancing recommendations
+    st.markdown('<div class="section-header">🔄 Rebalancing Recommendations</div>', unsafe_allow_html=True)
     
     rebalancing_needed = False
     recommendations = []
@@ -344,19 +589,25 @@ if calculate_button or st.session_state.calculated:
         
         if abs(diff) > 5:  # If difference is more than 5%
             rebalancing_needed = True
+            icon = ASSET_CLASSES[asset]['icon']
             if diff > 0:
-                recommendations.append(f"✅ Increase **{asset}** allocation by {diff:.1f}%")
+                recommendations.append(f"📈 Increase **{icon} {asset}** allocation by {diff:.1f}%")
             else:
-                recommendations.append(f"⚠️ Reduce **{asset}** allocation by {abs(diff):.1f}%")
+                recommendations.append(f"📉 Reduce **{icon} {asset}** allocation by {abs(diff):.1f}%")
     
     if rebalancing_needed:
         st.markdown('<div class="warning-box">', unsafe_allow_html=True)
-        st.markdown("**Your portfolio needs rebalancing:**")
+        st.markdown("## ⚠️ Portfolio Rebalancing Required")
+        st.markdown("**Your portfolio needs the following adjustments:**")
         for rec in recommendations:
             st.markdown(rec)
+        st.markdown("💡 **Tip:** Rebalance quarterly or when allocation drifts >5% from target")
         st.markdown('</div>', unsafe_allow_html=True)
     else:
-        st.success("✅ Your portfolio is well-balanced!")
+        st.markdown('<div class="success-box">', unsafe_allow_html=True)
+        st.markdown("## ✅ Portfolio Status: Well-Balanced!")
+        st.markdown("Your current allocation aligns well with the recommended strategy for your age group.")
+        st.markdown('</div>', unsafe_allow_html=True)
     
     # Risk assessment based on age
     st.markdown('<div class="recommendation-box">', unsafe_allow_html=True)
@@ -412,5 +663,27 @@ else:
         """)
     
     # Footer
-    st.markdown("---")
-    st.markdown("💡 **Remember:** This tool provides educational guidance only. Consult a financial advisor for personalized advice.")
+    # Close main content wrapper
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Premium footer
+    st.markdown("""
+    <div class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>💎 WealthWise</h3>
+                <p>Your Premium Financial Planning Dashboard</p>
+            </div>
+            <div class="footer-links">
+                <a href="#" target="_blank">📊 LinkedIn</a>
+                <a href="#" target="_blank">🐦 Twitter</a>
+                <a href="#" target="_blank">📧 Contact</a>
+                <a href="#" target="_blank">📝 Blog</a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 WealthWise Financial Planning Tool. All rights reserved.<br>
+            💡 This tool provides educational guidance only. Consult a financial advisor for personalized advice.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
