@@ -5,10 +5,10 @@
 # Financial Planning Calculator
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://abhishektiwari.github.io/financial-planning-tool/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://abhishek282001tiwari.github.io/financial-planning-tool/)
 
 ## Live Demo
-🚀 **[Financial Planning Calculator](https://abhishektiwari.github.io/financial-planning-tool/)** - Try it now!
+**[Financial Planning Calculator](https://abhishek282001tiwari.github.io/financial-planning-tool/)** - Try it now!
 
 ## Overview
 
@@ -28,13 +28,13 @@ A free, open-source financial planning tool that helps users optimize their port
 
 ### Option 1: Use Online (Recommended)
 
-Simply visit the live demo: **[Financial Planning Calculator](https://abhishektiwari.github.io/financial-planning-tool/)**
+Simply visit the live demo: **[Financial Planning Calculator](https://abhishek282001tiwari.github.io/financial-planning-tool/)**
 
 ### Option 2: Run Locally
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/financial-planning-tool.git
+git clone https://github.com/Abhishek282001Tiwari/financial-planning-tool.git
 cd financial-planning-tool
 
 # Open index.html in your browser
@@ -99,8 +99,6 @@ Bonds % = Age
 ```
 financial-planning-tool/
 ├── index.html            # Main web application
-├── app.py               # Legacy Streamlit application
-├── requirements.txt     # Python dependencies (legacy)
 ├── README.md           # Project documentation
 ├── LICENSE             # MIT License
 ├── .github/workflows/  # GitHub Actions for deployment
