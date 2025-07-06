@@ -2,56 +2,54 @@
 
 ## 2. README.md
 ```markdown
-# 💰 Open-Source Financial Planning & Portfolio Allocation Tool
+# Financial Planning Calculator
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://financial-planner.streamlit.app)
-[![Python](https://img.shields.io/badge/python-v3.9+-blue.svg)](https://www.python.org/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://abhishektiwari.github.io/financial-planning-tool/)
 
-## 🎯 Overview
+## Live Demo
+🚀 **[Financial Planning Calculator](https://abhishektiwari.github.io/financial-planning-tool/)** - Try it now!
+
+## Overview
 
 A free, open-source financial planning tool that helps users optimize their portfolio allocation based on age, risk tolerance, and financial goals. Built with modern portfolio theory principles and designed for educational purposes.
 
-### 🌟 Live Demo
-[Try it on Streamlit Cloud](https://financial-planner.streamlit.app) *(Replace with your actual URL)*
+## Key Features
 
-## ✨ Key Features
+- Real-time Portfolio Visualization - Interactive charts showing current vs recommended allocation
+- Age-based Asset Allocation - Intelligent recommendations using the Rule of 100
+- Future Value Projections - Multiple CAGR scenarios (5%, 10%, 15%)
+- Rebalancing Suggestions - Clear actionable advice for portfolio optimization
+- Educational Insights - Learn financial concepts while planning
+- Mobile Responsive - Works seamlessly on all devices
+- Dark Theme - Modern, clean interface with optimal readability
 
-- 📊 **Real-time Portfolio Visualization** - Interactive charts showing current vs recommended allocation
-- 🎯 **Age-based Asset Allocation** - Intelligent recommendations using the Rule of 100
-- 📈 **Future Value Projections** - Multiple CAGR scenarios (5%, 10%, 15%)
-- 🔄 **Rebalancing Suggestions** - Clear actionable advice for portfolio optimization
-- 💡 **Educational Insights** - Learn financial concepts while planning
-- 📱 **Mobile Responsive** - Works seamlessly on all devices
+## Quick Start
 
-## 🚀 Quick Start
+### Option 1: Use Online (Recommended)
 
-### Option 1: Run Locally
+Simply visit the live demo: **[Financial Planning Calculator](https://abhishektiwari.github.io/financial-planning-tool/)**
+
+### Option 2: Run Locally
 
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/financial-planning-tool.git
 cd financial-planning-tool
 
-# Create virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the application
-streamlit run app.py
+# Open index.html in your browser
+open index.html
 ```
 
-### Option 2: Deploy to Streamlit Cloud (Free)
+### Option 3: Deploy to GitHub Pages
 
 1. Fork this repository
-2. Sign up at [streamlit.io](https://streamlit.io)
-3. Connect your GitHub account
-4. Deploy directly from your fork
+2. Go to Settings > Pages
+3. Select "Deploy from a branch"
+4. Choose "main" branch
+5. Your site will be available at `https://yourusername.github.io/financial-planning-tool/`
 
-## 📖 How to Use
+## How to Use
 
 1. **Enter Your Information**
    - Age and monthly income
@@ -66,7 +64,7 @@ streamlit run app.py
    - See future projections
    - Get rebalancing recommendations
 
-## 🧮 Financial Calculations
+## Financial Calculations
 
 ### Future Value Formula
 ```
@@ -84,7 +82,7 @@ Equity % = 100 - Age
 Bonds % = Age
 ```
 
-## 📊 Asset Classes Supported
+## Asset Classes Supported
 
 | Asset Class | Expected Return | Risk (σ) | Color |
 |------------|----------------|----------|-------|
@@ -96,22 +94,23 @@ Bonds % = Age
 | Insurance | 4% | 2% | Purple |
 | Emergency Fund | 3% | 1% | Gray |
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 financial-planning-tool/
-├── app.py                 # Main Streamlit application
-├── requirements.txt       # Python dependencies
-├── README.md             # Project documentation
-├── LICENSE               # MIT License
-├── .gitignore           # Git ignore file
-├── docs/                # Additional documentation
-│   ├── formulas.md      # Mathematical formulas
-│   └── theory.md        # Portfolio theory explanation
-└── images/              # Screenshots and diagrams
+├── index.html            # Main web application
+├── app.py               # Legacy Streamlit application
+├── requirements.txt     # Python dependencies (legacy)
+├── README.md           # Project documentation
+├── LICENSE             # MIT License
+├── .github/workflows/  # GitHub Actions for deployment
+├── docs/              # Additional documentation
+│   ├── formulas.md    # Mathematical formulas
+│   └── theory.md      # Portfolio theory explanation
+└── images/            # Screenshots and diagrams
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes:
 
@@ -121,20 +120,22 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📚 Educational Resources
+## Educational Resources
 
 - [Modern Portfolio Theory](docs/theory.md)
 - [Financial Formulas Explained](docs/formulas.md)
 - [Markowitz Portfolio Theory](https://en.wikipedia.org/wiki/Modern_portfolio_theory)
 - [Black-Litterman Model](https://en.wikipedia.org/wiki/Black%E2%80%93Litterman_model)
 
-## 🛣️ Roadmap
+## Roadmap
 
 ### Version 1.0 (Current)
 - ✅ Basic portfolio allocation
 - ✅ Future value calculations
 - ✅ Age-based recommendations
 - ✅ Rebalancing suggestions
+- ✅ Dark theme interface
+- ✅ GitHub Pages deployment
 
 ### Version 2.0 (Planned)
 - [ ] Monte Carlo simulations
@@ -149,33 +150,34 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 - [ ] Advanced risk metrics
 - [ ] Options strategies
 
-## ⚖️ License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Harry Markowitz** - Modern Portfolio Theory
 - **Fischer Black & Robert Litterman** - Black-Litterman Model
-- **Streamlit Team** - Amazing framework for data apps
 - **Open Source Community** - Continuous inspiration
+- **Plotly.js** - Interactive charting library
 
-## 📞 Contact
+## Contact
 
 - **Author**: Abhishek Pankaj Tiwari
 - **Email**: abhishekt282001@gmail.com
 - **LinkedIn**: [linkedin.com/in/yourprofile](www.linkedin.com/in/abhishek282001)
 - **Twitter**: [@yourhandle](https://x.com/abhishekt282001)
 
-## 📈 Performance Metrics
+## Performance Metrics
 
 - **Load Time**: < 2 seconds
 - **Calculation Time**: < 100ms
 - **Mobile Responsive**: Yes
-- **Accessibility**: WCAG 2.1 AA compliant
+- **Dark Theme**: Optimized for readability
+- **No Server Required**: Pure client-side application
 
 ---
 
 **Disclaimer**: This tool is for educational purposes only. Always consult with a qualified financial advisor before making investment decisions.
 
-Made with ❤️ for the open-source community
+Made for the open-source community
